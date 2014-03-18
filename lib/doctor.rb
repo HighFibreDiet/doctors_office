@@ -40,4 +40,9 @@ class Doctor
     DB.exec("UPDATE doctors SET specialty_id = #{self.specialty_id} WHERE id = #{self.id};")
   end
 
+  def num_patients
+    results = DB.exec("SELECT count(name) num_patients FROM patients WHERE doctor_id = #{self.id}")
+    results.first['num_patients'].to_i
+  end
+
 end

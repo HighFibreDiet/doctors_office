@@ -42,4 +42,18 @@ class Patient
     DB.exec("UPDATE patients SET birth_date = '#{self.birthdate}' WHERE id = #{self.id};")
     DB.exec("UPDATE patients SET doctor_id = #{self.doctor_id} WHERE id = #{self.id};")
   end
+
+  def self.search(name)
+    results = DB.exec("SELECT * FROM patients WHERE name LIKE '%#{name}%';")
+    patients = []
+    results.each do |result|
+      name = result['name']
+      birthdate = result['birth_date']
+      doctor_id = result['doctor_id'].to_i
+      id = result['id'].to_i
+      patients << Patient.new({:name => name, :birthdate => birthdate, :doctor_id => doctor_id, :id => id})
+    end
+    patients
+
+  end
 end

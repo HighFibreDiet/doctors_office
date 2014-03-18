@@ -46,4 +46,16 @@ describe Patient do
       results.first['name'].should eq 'Update New Name'
     end
   end
+
+  describe '.search' do
+    it 'returns a list of patients that match the search term' do
+      new_patient1 = Patient.new({:name => "Susue Q", :birthdate => '2002-09-30', :doctor_id => 2})
+      new_patient2 = Patient.new({:name => "Sam Q", :birthdate => '2002-09-30', :doctor_id => 2})
+      new_patient3 = Patient.new({:name => "Steve Q", :birthdate => '2002-09-30', :doctor_id => 2})
+      new_patient1.save
+      new_patient2.save
+      new_patient3.save
+      Patient.search("Q").should eq [new_patient1, new_patient2, new_patient3]
+    end
+  end
 end

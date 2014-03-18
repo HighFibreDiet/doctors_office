@@ -54,4 +54,18 @@ describe Doctor do
     end
   end
 
+  describe '#num_patients' do
+    it 'returns a count of the number of patients for a specific doctor' do
+      new_doctor = Doctor.new({:name => "Doctor Name", :specialty_id => 9})
+      new_doctor.save
+      new_patient1 = Patient.new({:name => "Susue Q", :birthdate => '2002-09-30', :doctor_id => new_doctor.id})
+      new_patient2 = Patient.new({:name => "Sam Q", :birthdate => '2002-09-30', :doctor_id => new_doctor.id})
+      new_patient3 = Patient.new({:name => "Steve Q", :birthdate => '2002-09-30', :doctor_id => new_doctor.id})
+      new_patient1.save
+      new_patient2.save
+      new_patient3.save
+      new_doctor.num_patients.should eq 3
+    end
+  end
+
 end
