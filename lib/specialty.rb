@@ -11,6 +11,15 @@ class Specialty
     @id = results.first['id'].to_i
   end
 
+  def delete
+    DB.exec("DELETE FROM specialty WHERE id = #{self.id}")
+  end
+
+  def update(description)
+    @description = description
+    DB.exec("UPDATE specialty SET description = '#{self.description}' WHERE id = #{self.id}")
+  end
+
   def self.all
     results = DB.exec("SELECT * FROM specialty;")
     specialties = []
@@ -33,7 +42,8 @@ class Specialty
 
       name = result['name']
       specialty_id = result['specialty_id'].to_i
-      doctors_by_specialty << Doctor.new({:name => name, :specialty_id => specialty_id})
+      id = result['id'].to_i
+      doctors_by_specialty << Doctor.new({:name => name, :specialty_id => specialty_id, :id => id})
     end
   doctors_by_specialty
  end

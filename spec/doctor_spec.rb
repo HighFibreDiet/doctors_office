@@ -35,4 +35,23 @@ describe Doctor do
     end
   end
 
+  describe '#delete' do
+    it 'deletes a doctor from the database' do
+      new_doctor = Doctor.new({:name => "Doctor Name", :specialty_id => 9})
+      new_doctor.save
+      new_doctor.delete
+      Doctor.all.should eq []
+    end
+  end
+
+  describe '#update' do
+    it 'updates the name and specialty_id in the database' do
+      new_doctor = Doctor.new({:name => "Doctor Name", :specialty_id => 9})
+      new_doctor.save
+      new_doctor.update("Doctor New Name", 9)
+      results = DB.exec("SELECT * FROM doctors WHERE id = #{new_doctor.id};")
+      results.first['name'].should eq 'Doctor New Name'
+    end
+  end
+
 end

@@ -10,6 +10,7 @@ describe Specialty do
       new_specialty = Specialty.new('Neurosurgery')
       new_specialty.description.should eq 'Neurosurgery'
     end
+
   end
 
   describe '#save' do
@@ -22,6 +23,25 @@ describe Specialty do
       new_specialty = Specialty.new('OBGYN')
       new_specialty.save
       Specialty.all.should eq [new_specialty]
+    end
+  end
+
+  describe '#delete' do
+    it 'deletes a specialty and from the database' do
+      new_specialty = Specialty.new('OBGYN')
+      new_specialty.save
+      new_specialty.delete
+      Specialty.all.should eq []
+    end
+  end
+
+  describe '#update' do
+    it 'updates the description in the database' do
+      new_specialty = Specialty.new('OBGYN')
+      new_specialty.save
+      new_specialty.update('OB-GYN')
+      results = DB.exec("SELECT * FROM specialty WHERE id = #{new_specialty.id};")
+      results.first['description'].should eq 'OB-GYN'
     end
   end
 
@@ -42,7 +62,4 @@ describe Specialty do
       new_specialty.all_doctors.should eq [new_doctor1, new_doctor2]
     end
   end
-
-
-
 end

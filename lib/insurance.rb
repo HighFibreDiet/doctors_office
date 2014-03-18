@@ -11,6 +11,15 @@ class Insurance
     @id = results.first['id'].to_i
   end
 
+  def delete
+    DB.exec("DELETE FROM insurance_companies WHERE id = #{self.id}")
+  end
+
+  def update(name)
+    @name = name
+    DB.exec("UPDATE insurance_companies SET name = '#{self.name}' WHERE id = #{self.id}")
+  end
+
   def self.all
     results = DB.exec("SELECT * FROM insurance_companies;")
     insurance_companies = []

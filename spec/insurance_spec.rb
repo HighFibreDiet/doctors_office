@@ -32,4 +32,23 @@ describe Insurance do
     end
   end
 
+  describe '#delete' do
+    it 'deletes a insurance from the database' do
+      new_insurance = Insurance.new('OBGYN')
+      new_insurance.save
+      new_insurance.delete
+      Insurance.all.should eq []
+    end
+  end
+
+  describe '#update' do
+    it 'updates the name in the database' do
+      new_insurance = Insurance.new('Red Sheild')
+      new_insurance.save
+      new_insurance.update('Red Shield')
+      results = DB.exec("SELECT * FROM insurance_companies WHERE id = #{new_insurance.id};")
+      results.first['name'].should eq 'Red Shield'
+    end
+  end
+
 end

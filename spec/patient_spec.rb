@@ -27,4 +27,23 @@ describe Patient do
       Patient.all.should eq [new_patient]
     end
   end
+
+  describe '#delete' do
+    it 'deletes a patient from the database' do
+      new_patient = Patient.new({:name => 'Bob DeleteTest',:birthdate => '1987-01-01',:doctor_id => 1})
+      new_patient.save
+      new_patient.delete
+      Patient.all.should eq []
+    end
+  end
+
+  describe '#update' do
+    it 'updates the name and specialty_id in the database' do
+      new_patient = Patient.new({:name => 'Bob UpdateTest',:birthdate => '1987-01-01',:doctor_id => 1})
+      new_patient.save
+      new_patient.update("Update New Name", '2014-09-12', 9)
+      results = DB.exec("SELECT * FROM patients WHERE id = #{new_patient.id};")
+      results.first['name'].should eq 'Update New Name'
+    end
+  end
 end
