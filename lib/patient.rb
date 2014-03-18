@@ -56,4 +56,9 @@ class Patient
     patients
 
   end
+
+  def doctor_name
+    results = DB.exec("SELECT name FROM doctors WHERE id = #{self.doctor_id};")
+    results.first['name']
+  end
 end

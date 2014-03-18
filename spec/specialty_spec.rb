@@ -55,9 +55,9 @@ describe Specialty do
     it 'is able to list all of the doctors for a specialty instance' do
       new_specialty = Specialty.new('OBGYN')
       new_specialty.save
-      new_doctor1 = Doctor.new({:name => "Susie Smith", :specialty_id => new_specialty.id})
+      new_doctor1 = Doctor.new({:name => "Susie Smith", :specialty_id => new_specialty.id, :insurance_id => 7})
       new_doctor1.save
-      new_doctor2 = Doctor.new({:name => "Bob Smith", :specialty_id => new_specialty.id})
+      new_doctor2 = Doctor.new({:name => "Bob Smith", :specialty_id => new_specialty.id, :insurance_id => 7})
       new_doctor2.save
       new_specialty.all_doctors.should eq [new_doctor1, new_doctor2]
     end

@@ -43,7 +43,8 @@ class Specialty
       name = result['name']
       specialty_id = result['specialty_id'].to_i
       id = result['id'].to_i
-      doctors_by_specialty << Doctor.new({:name => name, :specialty_id => specialty_id, :id => id})
+      insurance_id = result['insurance_id'].to_i
+      doctors_by_specialty << Doctor.new({:name => name, :specialty_id => specialty_id, :id => id, :insurance_id => insurance_id})
     end
   doctors_by_specialty
  end
