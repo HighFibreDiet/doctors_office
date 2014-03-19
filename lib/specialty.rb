@@ -3,7 +3,7 @@ class Specialty < Medicalthing
 
   def initialize(attributes)
     @name = attributes['name']
-    @id = attributes['id']
+    @id = attributes['id'].to_i
   end
 
   def save

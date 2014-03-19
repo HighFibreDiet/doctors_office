@@ -3,7 +3,7 @@ class Insurance < Medicalthing
 
   def initialize(attributes)
     @name = attributes['name']
-    @id = attributes['id']
+    @id = attributes['id'].to_i
   end
 
   def save
@@ -28,6 +28,6 @@ class Insurance < Medicalthing
   # end
 
   def ==(another_insurance)
-    self.name == another_insurance.name
+    self.id == another_insurance.id
   end
 end

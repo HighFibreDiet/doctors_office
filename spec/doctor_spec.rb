@@ -7,7 +7,7 @@ describe Doctor do
       new_doctor.should be_an_instance_of Doctor
     end
     it 'knows its name and specialty' do
-      new_doctor = Doctor.new({'name' => "Sally Smith", 'specialty_id '=> 1, 'insurance_id' => 5})
+      new_doctor = Doctor.new({'name' => "Sally Smith", 'specialty_id'=> 1, 'insurance_id' => 5})
       new_doctor.name.should eq "Sally Smith"
       new_doctor.specialty_id.should eq 1
       new_doctor.insurance_id.should eq 5
