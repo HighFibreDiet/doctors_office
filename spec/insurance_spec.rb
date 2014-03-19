@@ -46,7 +46,7 @@ describe Insurance do
       new_insurance = Insurance.new('Red Sheild')
       new_insurance.save
       new_insurance.update('Red Shield')
-      results = DB.exec("SELECT * FROM insurance_companies WHERE id = #{new_insurance.id};")
+      results = DB.exec("SELECT * FROM insurance WHERE id = #{new_insurance.id};")
       results.first['name'].should eq 'Red Shield'
     end
   end
